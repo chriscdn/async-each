@@ -10,7 +10,7 @@ This module provides a method for iterating an array in an asynchronous manner t
 
 ## Example
 
-The following example can be used to square the integers in an array.
+The following example can be used to square the integers of an array.
 
 ```js
 const asyncForEach = require('@chriscdn/async-for-each')
