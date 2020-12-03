@@ -12,8 +12,8 @@ function asyncForEach(items, cb, statuscb = status => {}) {
 					result = await cb(item, index, items)
 					resolve(result)
 				} catch (e) {
-					reject(e)
 					err = e
+					reject(e)
 				} finally {
 					progress++
 					statuscb({
