@@ -6,7 +6,7 @@ Iterate an array in an asynchronous manner with a progress callback function.
 
 A standard iteration of a large array can block the event loop if the block doesn't include asynchronous code.  This can cause the user interface to become unresponsive.
 
-This module provides a method for iterating an array in an asynchronous manner to minimise the risk of blocking the event loop.  It also provides a status callback to report the progress of the iteration.  This can be used to provide feedback to the user on the status of a process.
+This module provides a method for iterating an array in an asynchronous manner to minimise the risk of blocking the event loop.  It also provides a status callback to report the progress of the iteration.  This can be used to provide feedback to the user on the state of a process.
 
 ## Example
 
