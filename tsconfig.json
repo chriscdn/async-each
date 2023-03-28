@@ -3,14 +3,11 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["dom", "ESNext"],
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true,
     "sourceMap": true,
     "outDir": "./lib/",
     "declaration": true
   },
-  "extends": "@tsconfig/node16/tsconfig.json",
   "include": ["./src/**/*"]
 }
