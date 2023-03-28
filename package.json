@@ -1,6 +1,13 @@
 {
-	"name": "@chriscdn/async-for-each",
-	"version": "1.0.0",
-	"main": "index.js",
-	"license": "MIT"
+  "name": "@chriscdn/async-for-each",
+  "version": "1.0.0",
+  "module": "true",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rm -rf ./lib/ && tsc"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.2"
+  }
 }
