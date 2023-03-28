@@ -1,28 +1,32 @@
-export type StatusType<T> = {
+export type StatusType<T, R> = {
   progress: number;
   total: number;
   percent: number;
   item: T;
   index: number;
   err: any;
-  result: any;
+  result: R | null;
 };
-export type Callback<T> = (item: T, index: number, items: Array<T>) => void;
-export type StatusCallback<T> = (status: StatusType<T>) => void;
+export type Callback<T, R> = (
+  item: T,
+  index: number,
+  items: Array<T>
+) => Promise<R>;
+export type StatusCallback<T, R> = (status: StatusType<T, R>) => void;
 
-function asyncForEach<T>(
+function asyncForEach<T, R>(
   items: Array<T>,
-  cb: Callback<T>,
-  statuscb: StatusCallback<T> = (status) => {}
+  cb: Callback<T, R>,
+  statuscb: (status: StatusType<T, R>) => void
 ) {
   let progress = 0;
   const total = items.length;
 
-  const promises = items.map((item, index, items) => {
+  const promises = items.map((item: T, index: number, items: Array<T>) => {
     return new Promise((resolve, reject) => {
       setTimeout(async () => {
         let err = null;
-        let result = null;
+        let result: R | null = null;
         try {
           result = await cb(item, index, items);
           resolve(result);
@@ -31,7 +35,8 @@ function asyncForEach<T>(
           reject(e);
         } finally {
           progress++;
-          statuscb({
+
+          const status: StatusType<T, R> = {
             progress,
             total,
             percent: Math.floor((100 * progress) / total),
@@ -39,7 +44,9 @@ function asyncForEach<T>(
             index,
             err,
             result,
-          });
+          };
+
+          statuscb(status);
         }
       }, 0);
     });

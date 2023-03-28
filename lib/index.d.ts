@@ -1,13 +1,13 @@
-export type StatusType<T> = {
+export type StatusType<T, R> = {
     progress: number;
     total: number;
     percent: number;
     item: T;
     index: number;
     err: any;
-    result: any;
+    result: R | null;
 };
-export type Callback<T> = (item: T, index: number, items: Array<T>) => void;
-export type StatusCallback<T> = (status: StatusType<T>) => void;
-declare function asyncForEach<T>(items: Array<T>, cb: Callback<T>, statuscb?: StatusCallback<T>): Promise<unknown[]>;
+export type Callback<T, R> = (item: T, index: number, items: Array<T>) => Promise<R>;
+export type StatusCallback<T, R> = (status: StatusType<T, R>) => void;
+declare function asyncForEach<T, R>(items: Array<T>, cb: Callback<T, R>, statuscb: (status: StatusType<T, R>) => void): Promise<unknown[]>;
 export default asyncForEach;
