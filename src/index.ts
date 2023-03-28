@@ -1,4 +1,4 @@
-type StatusType<T> = {
+export type StatusType<T> = {
   progress: number;
   total: number;
   percent: number;
@@ -7,8 +7,8 @@ type StatusType<T> = {
   err: any;
   result: any;
 };
-type Callback<T> = (item: T, index: number, items: Array<T>) => void;
-type StatusCallback<T> = (status: StatusType<T>) => void;
+export type Callback<T> = (item: T, index: number, items: Array<T>) => void;
+export type StatusCallback<T> = (status: StatusType<T>) => void;
 
 function asyncForEach<T>(
   items: Array<T>,
