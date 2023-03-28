@@ -18,12 +18,12 @@ function asyncForEach<T, R>(
   items: Array<T>,
   cb: Callback<T, R>,
   statuscb: (status: StatusType<T, R>) => void
-) {
+): Promise<Array<R | null>> {
   let progress = 0;
   const total = items.length;
 
   const promises = items.map((item: T, index: number, items: Array<T>) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<R>((resolve, reject) => {
       setTimeout(async () => {
         let err = null;
         let result: R | null = null;
