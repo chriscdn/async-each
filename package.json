@@ -1,6 +1,6 @@
 {
-  "name": "@chriscdn/async-for-each",
-  "version": "1.0.0",
+  "name": "@chriscdn/async-each",
+  "version": "2.0.0",
   "type": "module",
   "main": "lib/index.js",
   "scripts": {
