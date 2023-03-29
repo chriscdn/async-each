@@ -7,13 +7,9 @@ export type StatusType<T, R> = {
   result: R;
 };
 
-export type CallbackFn<T, R> = (
-  item: T,
-  index: number,
-  items: Array<T>
-) => Promise<R>;
+type CallbackFn<T, R> = (item: T, index: number, items: Array<T>) => Promise<R>;
 
-export type StatusCallbackFn<T, R> = (status: StatusType<T, R>) => void;
+type StatusCallbackFn<T, R> = (status: StatusType<T, R>) => void;
 
 function asyncEach<T, R>(
   items: Array<T>,
