@@ -21,24 +21,24 @@ function asyncEach<T, R>(
 
   const promises = items.map((item: T, index: number, items: Array<T>) => {
     return new Promise<R>(async (resolve, reject) => {
-      // setTimeout(async () => {
-      try {
-        const result = await callbackFn(item, index, items);
+      setTimeout(async () => {
+        try {
+          const result = await callbackFn(item, index, items);
 
-        resolve(result);
+          resolve(result);
 
-        statusCallbackFn({
-          progress: progress++,
-          total,
-          percent: Math.floor((100 * progress) / total),
-          item,
-          index,
-          result,
-        });
-      } catch (err) {
-        reject(err);
-      }
-      // }, 0);
+          statusCallbackFn({
+            progress: progress++,
+            total,
+            percent: Math.floor((100 * progress) / total),
+            item,
+            index,
+            result,
+          });
+        } catch (err) {
+          reject(err);
+        }
+      }, 0);
     });
   });
 
