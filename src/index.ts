@@ -4,54 +4,49 @@ export type StatusType<T, R> = {
   percent: number;
   item: T;
   index: number;
-  err: any;
-  result: R | null;
+  result: R;
 };
-export type Callback<T, R> = (
+
+export type CallbackFn<T, R> = (
   item: T,
   index: number,
   items: Array<T>
 ) => Promise<R>;
-export type StatusCallback<T, R> = (status: StatusType<T, R>) => void;
+
+export type StatusCallbackFn<T, R> = (status: StatusType<T, R>) => void;
 
 function asyncForEach<T, R>(
   items: Array<T>,
-  cb: Callback<T, R>,
-  statuscb: (status: StatusType<T, R>) => void
-): Promise<Array<R | null>> {
-  let progress = 0;
-  const total = items.length;
+  callbackFn: CallbackFn<T, R>,
+  statusCallbackFn: StatusCallbackFn<T, R> = () => {}
+): Promise<Array<R>> {
+  let progress: number = 0;
+  const total: number = items.length;
 
   const promises = items.map((item: T, index: number, items: Array<T>) => {
     return new Promise<R>((resolve, reject) => {
       setTimeout(async () => {
-        let err = null;
-        let result: R | null = null;
         try {
-          result = await cb(item, index, items);
-          resolve(result);
-        } catch (e) {
-          err = e;
-          reject(e);
-        } finally {
-          progress++;
+          const result = await callbackFn(item, index, items);
 
-          const status: StatusType<T, R> = {
-            progress,
+          resolve(result);
+
+          statusCallbackFn({
+            progress: progress++,
             total,
             percent: Math.floor((100 * progress) / total),
             item,
             index,
-            err,
             result,
-          };
-
-          statuscb(status);
+          });
+        } catch (err) {
+          reject(err);
         }
       }, 0);
     });
   });
 
+  // This will reject if any promise fails.
   return Promise.all(promises);
 }
 
