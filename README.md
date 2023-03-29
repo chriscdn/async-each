@@ -1,4 +1,4 @@
-# async-for-each
+# async-each
 
 Iterate an array in an asynchronous manner with a progress callback function.
 
@@ -13,10 +13,10 @@ This module provides a method for iterating an array in an asynchronous manner t
 The following example can be used to square the integers of an array.
 
 ```js
-import asyncForEach from "@chriscdn/async-for-each";
+import asyncEach from "@chriscdn/async-each";
 
 // asyncForEach returns a promise
-const results = await asyncForEach(
+const results = await asyncEach(
   [1, 2, 3],
   (item, index, items) => {
     return item * item;

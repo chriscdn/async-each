@@ -15,7 +15,7 @@ export type CallbackFn<T, R> = (
 
 export type StatusCallbackFn<T, R> = (status: StatusType<T, R>) => void;
 
-function asyncForEach<T, R>(
+function asyncEach<T, R>(
   items: Array<T>,
   callbackFn: CallbackFn<T, R>,
   statusCallbackFn: StatusCallbackFn<T, R> = () => {}
@@ -24,25 +24,25 @@ function asyncForEach<T, R>(
   const total: number = items.length;
 
   const promises = items.map((item: T, index: number, items: Array<T>) => {
-    return new Promise<R>((resolve, reject) => {
-      setTimeout(async () => {
-        try {
-          const result = await callbackFn(item, index, items);
+    return new Promise<R>(async (resolve, reject) => {
+      // setTimeout(async () => {
+      try {
+        const result = await callbackFn(item, index, items);
 
-          resolve(result);
+        resolve(result);
 
-          statusCallbackFn({
-            progress: progress++,
-            total,
-            percent: Math.floor((100 * progress) / total),
-            item,
-            index,
-            result,
-          });
-        } catch (err) {
-          reject(err);
-        }
-      }, 0);
+        statusCallbackFn({
+          progress: progress++,
+          total,
+          percent: Math.floor((100 * progress) / total),
+          item,
+          index,
+          result,
+        });
+      } catch (err) {
+        reject(err);
+      }
+      // }, 0);
     });
   });
 
@@ -50,4 +50,4 @@ function asyncForEach<T, R>(
   return Promise.all(promises);
 }
 
-export default asyncForEach;
+export default asyncEach;
