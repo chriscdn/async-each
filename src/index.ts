@@ -1,4 +1,4 @@
-export type StatusType<T, R> = {
+export type TStatus<T, R> = {
   progress: number;
   total: number;
   percent: number;
@@ -7,14 +7,18 @@ export type StatusType<T, R> = {
   result: R;
 };
 
-type CallbackFn<T, R> = (item: T, index: number, items: Array<T>) => Promise<R>;
+export type TCallbackFn<T, R> = (
+  item: T,
+  index: number,
+  items: Array<T>,
+) => Promise<R>;
 
-type StatusCallbackFn<T, R> = (status: StatusType<T, R>) => void;
+export type TStatusCallbackFn<T, R> = (status: TStatus<T, R>) => void;
 
 function asyncEach<T, R>(
   items: Array<T>,
-  callbackFn: CallbackFn<T, R>,
-  statusCallbackFn: StatusCallbackFn<T, R> = () => {}
+  callbackFn: TCallbackFn<T, R>,
+  statusCallbackFn: TStatusCallbackFn<T, R> = () => {},
 ): Promise<Array<R>> {
   let progress: number = 0;
   const total: number = items.length;
