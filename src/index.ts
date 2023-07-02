@@ -1,4 +1,4 @@
-export type TStatus<T, R> = {
+type TStatus<T, R> = {
   progress: number;
   total: number;
   percent: number;
@@ -7,7 +7,7 @@ export type TStatus<T, R> = {
   result: R;
 };
 
-export type TCallbackFn<T, R> = (
+type TCallbackFn<T, R> = (
   item: T,
   index: number,
   items: Array<T>,
