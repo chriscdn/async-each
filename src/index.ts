@@ -1,4 +1,4 @@
-type TStatus<T, R> = {
+export type TAsyncEachStatus<T, R> = {
   progress: number;
   total: number;
   percent: number;
@@ -13,12 +13,14 @@ type TCallbackFn<T, R> = (
   items: Array<T>,
 ) => Promise<R>;
 
-export type TStatusCallbackFn<T, R> = (status: TStatus<T, R>) => void;
+export type TAsyncEachStatusCallbackFn<T, R> = (
+  status: TAsyncEachStatus<T, R>,
+) => void;
 
 function asyncEach<T, R>(
   items: Array<T>,
   callbackFn: TCallbackFn<T, R>,
-  statusCallbackFn: TStatusCallbackFn<T, R> = () => {},
+  statusCallbackFn: TAsyncEachStatusCallbackFn<T, R> = () => {},
 ): Promise<Array<R>> {
   let progress: number = 0;
   const total: number = items.length;
