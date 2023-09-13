@@ -1,14 +1,28 @@
 {
   "name": "@chriscdn/async-each",
-  "version": "2.0.6",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/mjs/index.js",
+  "version": "2.0.7",
+  "description": "Iterate an array in an asynchronous manner.",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "types": "lib/index.d.ts",
+  "author": "Christopher Meyer <chris@schwiiz.org>",
   "repository": "https://github.com/chriscdn/async-each",
   "scripts": {
-    "build": "rm -rf ./dist/ && tsc -p tsconfig-cjs.json && tsc -p tsconfig-esm.json"
+    "build": "rollup -c"
   },
   "license": "MIT",
   "devDependencies": {
+    "esbuild": "^0.19.2",
+    "rollup": "^3.29.1",
+    "rollup-plugin-dts": "^6.0.2",
+    "rollup-plugin-esbuild": "^5.0.0",
     "typescript": "^5.2.2"
-  }
+  },
+  "keywords": [
+    "promise",
+    "array",
+    "async",
+    "iterate",
+    "loop"
+  ]
 }

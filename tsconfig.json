@@ -1,11 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["dom", "ESNext"],
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "sourceMap": true,
-    "declaration": true
-  },
-  "include": ["./src/**/*"]
+    "target": "esnext",
+    "esModuleInterop": true
+  }
 }

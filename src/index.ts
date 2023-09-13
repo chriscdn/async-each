@@ -10,17 +10,17 @@ export type TAsyncEachStatus<T, R> = {
 type TCallbackFn<T, R> = (
   item: T,
   index: number,
-  items: Array<T>,
+  items: Array<T>
 ) => Promise<R>;
 
 export type TAsyncEachStatusCallbackFn<T, R> = (
-  status: TAsyncEachStatus<T, R>,
+  status: TAsyncEachStatus<T, R>
 ) => void;
 
 function asyncEach<T, R>(
   items: Array<T>,
   callbackFn: TCallbackFn<T, R>,
-  statusCallbackFn: TAsyncEachStatusCallbackFn<T, R> = () => {},
+  statusCallbackFn: TAsyncEachStatusCallbackFn<T, R> = () => {}
 ): Promise<Array<R>> {
   let progress: number = 0;
   const total: number = items.length;

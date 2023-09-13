@@ -8,7 +8,7 @@ Iterating a large array can block the event loop if the block doesn't include as
 
 This module provides a method for iterating an array in an asynchronous manner, which helps minimise the risk of blocking the event loop. It also provides a status callback to report the progress of the iteration. This can be useful for providing feedback to the user on the state of a process.
 
-The `asyncEach` function returns a `Promise`, which resolves to an array with the return values.
+The function returns a `Promise`, which resolves to an array with the return values.
 
 ## Example
 
