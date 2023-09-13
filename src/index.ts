@@ -11,7 +11,7 @@ type TCallbackFn<T, R> = (
   item: T,
   index: number,
   items: Array<T>
-) => Promise<R>;
+) => Promise<R> | R;
 
 export type TAsyncEachStatusCallbackFn<T, R> = (
   status: TAsyncEachStatus<T, R>

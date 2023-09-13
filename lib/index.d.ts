@@ -6,7 +6,7 @@ type TAsyncEachStatus<T, R> = {
     index: number;
     result: R;
 };
-type TCallbackFn<T, R> = (item: T, index: number, items: Array<T>) => Promise<R>;
+type TCallbackFn<T, R> = (item: T, index: number, items: Array<T>) => Promise<R> | R;
 type TAsyncEachStatusCallbackFn<T, R> = (status: TAsyncEachStatus<T, R>) => void;
 declare function asyncEach<T, R>(items: Array<T>, callbackFn: TCallbackFn<T, R>, statusCallbackFn?: TAsyncEachStatusCallbackFn<T, R>): Promise<Array<R>>;
 

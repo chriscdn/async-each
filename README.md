@@ -1,6 +1,6 @@
 # @chriscdn/async-each
 
-Asynchronously iterate an array with a progress callback function.
+Iterate an array in an asynchronous manner with a progress callback function.
 
 ## Motivation
 
@@ -9,6 +9,27 @@ Iterating a large array can block the event loop if the block doesn't include as
 This module provides a method for iterating an array in an asynchronous manner, which helps minimise the risk of blocking the event loop. It also provides a status callback to report the progress of the iteration. This can be useful for providing feedback to the user on the state of a process.
 
 The function returns a `Promise`, which resolves to an array with the return values.
+
+## Syntax
+
+```js
+const results = await asyncEach(array, callbackFn, statusCallbackFn);
+```
+
+### Parameters
+
+- `array`
+  - : The array to iterate.
+- `callbackFn`
+  - : A function to execute on each element of the array. The return value is aggregated into `results.` The function is called with the following arguments:
+    - `item`
+      - : The current item being processed in the array.
+    - `index`
+      - : The index of the item being processed in the array.
+    - `items`
+      - : The array being processed.
+- `statusCallbackFn`
+  - : A function to execute on the completion of an iteration.
 
 ## Example
 
