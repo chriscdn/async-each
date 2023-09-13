@@ -1,6 +1,6 @@
 # @chriscdn/async-each
 
-Iterate an array in an asynchronous manner with a progress callback function.
+Asynchronously iterate an array with a progress callback function.
 
 ## Motivation
 
