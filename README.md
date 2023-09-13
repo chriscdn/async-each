@@ -21,12 +21,12 @@ const results = await asyncEach(array, callbackFn, statusCallbackFn);
 - `array`
   - The array to iterate.
 - `callbackFn`
-  - A function to execute on each element of the array. The function can return a promise, and the resolved value is aggregated into `results.` The function is called with the following arguments:
+  - A function to execute on each element of the array. The function can return a promise, and the resolved value is aggregated into `results`. The function is called with the following arguments:
     - `item` - The current item being processed in the array.
     - `index` - The index of the item being processed in the array.
     - `items` - The array being processed.
 - `statusCallbackFn`
-  - A callback function to execute on the completion of an iteration. The function takes one argument, which is an object containing the following properties:
+  - An optional callback function to execute on the completion of an iteration. The function takes one argument, which is an object containing the following properties:
     - `progress` - The total number of items that have been processed.
     - `total` - The length of the array being processed.
     - `percent` - The number of items processed, as a percentage of the total number of items to process. This is simply `Math.floor((100 * progress) / total)`.
@@ -36,7 +36,7 @@ const results = await asyncEach(array, callbackFn, statusCallbackFn);
 
 ## Example
 
-The following example squares the integers of an array.
+The following example squares an array of integers.
 
 ```js
 import asyncEach from "@chriscdn/async-each";
