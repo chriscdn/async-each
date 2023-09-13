@@ -21,7 +21,7 @@ const results = await asyncEach(array, callbackFn, statusCallbackFn);
 - `array`
   - The array to iterate.
 - `callbackFn`
-  - A function to execute on each element of the array. The return value is aggregated into `results.` The function is called with the following arguments:
+  - A function to execute on each element of the array. The function can return a promise, and the resolved value is aggregated into `results.` The function is called with the following arguments:
     - `item`
       - The current item being processed in the array.
     - `index`
@@ -29,7 +29,19 @@ const results = await asyncEach(array, callbackFn, statusCallbackFn);
     - `items`
       - The array being processed.
 - `statusCallbackFn`
-  - A function to execute on the completion of an iteration.
+  - A callback function to execute on the completion of an iteration. The function is called with the following arguments:
+    - `progress`
+      - The total number of items processed.
+    - `total`
+      - The length of the array being processed.
+    - `percent`
+      - The completion as a percentage, rounded down.
+    - `item`
+      - The item of the array that was just completed.
+    - `index`
+      - The index of the item of the array that was just completed.
+    - `result`
+      - The resolved return value of the callback function on the item.
 
 ## Example
 
