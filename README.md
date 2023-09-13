@@ -19,17 +19,17 @@ const results = await asyncEach(array, callbackFn, statusCallbackFn);
 ### Parameters
 
 - `array`
-  - : The array to iterate.
+  - The array to iterate.
 - `callbackFn`
-  - : A function to execute on each element of the array. The return value is aggregated into `results.` The function is called with the following arguments:
+  - A function to execute on each element of the array. The return value is aggregated into `results.` The function is called with the following arguments:
     - `item`
-      - : The current item being processed in the array.
+      - The current item being processed in the array.
     - `index`
-      - : The index of the item being processed in the array.
+      - The index of the item being processed in the array.
     - `items`
-      - : The array being processed.
+      - The array being processed.
 - `statusCallbackFn`
-  - : A function to execute on the completion of an iteration.
+  - A function to execute on the completion of an iteration.
 
 ## Example
 
