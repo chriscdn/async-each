@@ -32,7 +32,6 @@ export default [
     plugins: [dts()],
     output: {
       file: pkg.types,
-      format: "es",
     },
   },
 ];
