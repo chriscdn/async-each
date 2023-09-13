@@ -29,7 +29,7 @@ const results = await asyncEach(array, callbackFn, statusCallbackFn);
     - `items`
       - The array being processed.
 - `statusCallbackFn`
-  - A callback function to execute on the completion of an iteration. The function is called with the following arguments:
+  - A callback function to execute on the completion of an iteration. The function is called with an object containing the following properties:
     - `progress`
       - The total number of items processed.
     - `total`
