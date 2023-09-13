@@ -29,19 +29,13 @@ const results = await asyncEach(array, callbackFn, statusCallbackFn);
     - `items`
       - The array being processed.
 - `statusCallbackFn`
-  - A callback function to execute on the completion of an iteration. The function is called with an object containing the following properties:
-    - `progress`
-      - The total number of items processed.
-    - `total`
-      - The length of the array being processed.
-    - `percent`
-      - The completion as a percentage, rounded down.
-    - `item`
-      - The item of the array that was just completed.
-    - `index`
-      - The index of the item of the array that was just completed.
-    - `result`
-      - The resolved return value of the callback function on the item.
+  - A callback function to execute on the completion of an iteration. The function takes one argument, which is an object containing the following properties:
+    - `progress` - The total number of items that have been processed.
+    - `total` - The length of the array being processed.
+    - `percent` - The number of items processed, as a percentage of the total number of items to process.
+    - `item` - The item of the array that was just completed.
+    - `index` - The index of the item of the array that was just completed.
+    - `result` - The resolved return value of the callback function on the item.
 
 ## Example
 
