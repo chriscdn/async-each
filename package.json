@@ -1,6 +1,6 @@
 {
   "name": "@chriscdn/async-each",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "Iterate an array in an asynchronous manner.",
   "author": "Christopher Meyer <chris@schwiiz.org>",
   "repository": "https://github.com/chriscdn/async-each",
@@ -16,7 +16,7 @@
   },
   "types": "./lib/index.d.ts",
   "scripts": {
-    "build": "microbundle",
+    "build": "rm -rf ./lib/ && microbundle",
     "dev": "microbundle watch"
   },
   "devDependencies": {
