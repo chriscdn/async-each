@@ -1,6 +1,6 @@
 {
   "name": "@chriscdn/async-each",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Iterate an array in an asynchronous manner.",
   "author": "Christopher Meyer <chris@schwiiz.org>",
   "repository": "https://github.com/chriscdn/async-each",
@@ -11,6 +11,7 @@
   "module": "./lib/async-each.module.js",
   "unpkg": "./lib/async-each.umd.js",
   "exports": {
+    "types": "./lib/index.d.ts",
     "require": "./lib/async-each.cjs",
     "default": "./lib/async-each.modern.js"
   },
