@@ -1,6 +1,6 @@
 {
   "name": "@chriscdn/async-each",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "Iterate an array in an asynchronous manner.",
   "author": "Christopher Meyer <chris@schwiiz.org>",
   "repository": "https://github.com/chriscdn/async-each",
