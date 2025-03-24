@@ -7,6 +7,9 @@ export type TAsyncEachStatus<T, R> = {
     result: R;
 };
 type TCallbackFn<T, R> = (item: T, index: number, items: Array<T>) => Promise<R> | R;
+type Options = {
+    rateLimit?: number;
+};
 export type TAsyncEachStatusCallbackFn<T, R> = (status: TAsyncEachStatus<T, R>) => void;
-declare function asyncEach<T, R>(items: Array<T>, callbackFn: TCallbackFn<T, R>, statusCallbackFn?: TAsyncEachStatusCallbackFn<T, R>): Promise<Array<R>>;
+declare const asyncEach: <T, R>(items: T[], callbackFn: TCallbackFn<T, R>, statusCallbackFn?: TAsyncEachStatusCallbackFn<T, R>, options?: Options) => Promise<R[]>;
 export default asyncEach;

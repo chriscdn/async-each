@@ -29,5 +29,8 @@
     "async",
     "iterate",
     "loop"
-  ]
+  ],
+  "dependencies": {
+    "@chriscdn/promise-semaphore": "^2.0.10"
+  }
 }
