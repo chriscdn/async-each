@@ -47,7 +47,7 @@ const results = await asyncEach(
   (status) => {
     // status can be used to show a progress indicator to the user
     console.log(status);
-  },
+  }
 );
 
 console.log(results);

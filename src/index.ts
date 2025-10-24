@@ -1,6 +1,6 @@
-import Semaphore from "@chriscdn/promise-semaphore";
+import { Semaphore } from "@chriscdn/promise-semaphore";
 
-export type TAsyncEachStatus<T, R> = {
+export type AsyncEachStatus<T, R> = {
   progress: number;
   total: number;
   percent: number;
@@ -9,7 +9,7 @@ export type TAsyncEachStatus<T, R> = {
   result: R;
 };
 
-type TCallbackFn<T, R> = (
+type CallbackFn<T, R> = (
   item: T,
   index: number,
   items: Array<T>,
@@ -19,21 +19,21 @@ type Options = {
   rateLimit?: number;
 };
 
-export type TAsyncEachStatusCallbackFn<T, R> = (
-  status: TAsyncEachStatus<T, R>,
+export type AsyncEachStatusCallbackFn<T, R> = (
+  status: AsyncEachStatus<T, R>,
 ) => void;
 
 const asyncEach = <T, R>(
   items: Array<T>,
-  callbackFn: TCallbackFn<T, R>,
-  statusCallbackFn: TAsyncEachStatusCallbackFn<T, R> = () => {},
+  callbackFn: CallbackFn<T, R>,
+  statusCallbackFn: AsyncEachStatusCallbackFn<T, R> = () => {},
   options: Options = {},
 ): Promise<Array<R>> => {
   let progress: number = 0;
   const total: number = items.length;
 
   const rateLimit = options.rateLimit ?? 0;
-  const semaphore = rateLimit ? new Semaphore(rateLimit) : null;
+  const semaphore = rateLimit > 0 ? new Semaphore(rateLimit) : null;
 
   const promises = items.map((item: T, index: number, items: Array<T>) => {
     return new Promise<R>(async (resolve, reject) => {
@@ -58,7 +58,7 @@ const asyncEach = <T, R>(
         } finally {
           semaphore?.release();
         }
-      }, 1);
+      }, 0);
     });
   });
 

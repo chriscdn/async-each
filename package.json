@@ -31,6 +31,6 @@
     "loop"
   ],
   "dependencies": {
-    "@chriscdn/promise-semaphore": "^2.0.10"
+    "@chriscdn/promise-semaphore": "^3.1.1"
   }
 }
