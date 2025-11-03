@@ -31,6 +31,9 @@
     "loop"
   ],
   "dependencies": {
-    "@chriscdn/promise-semaphore": "^3.1.1"
-  }
+    "@chriscdn/promise-semaphore": "^3.1.2"
+  },
+  "files": [
+    "lib"
+  ]
 }
