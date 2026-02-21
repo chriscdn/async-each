@@ -4,9 +4,15 @@ Asynchronously iterate over an array with optional concurrency control and a pro
 
 ## Installation
 
+Using npm:
+
 ```bash
 npm install @chriscdn/async-each
-# or
+```
+
+Using yarn:
+
+```bash
 yarn add @chriscdn/async-each
 ```
 
