@@ -6,22 +6,19 @@
   "repository": "https://github.com/chriscdn/async-each",
   "license": "MIT",
   "type": "module",
-  "source": "./src/index.ts",
-  "main": "./lib/async-each.cjs",
-  "module": "./lib/async-each.module.js",
-  "unpkg": "./lib/async-each.umd.js",
-  "exports": {
-    "types": "./lib/index.d.ts",
-    "require": "./lib/async-each.cjs",
-    "default": "./lib/async-each.modern.js"
-  },
+  "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
+  "exports": "./lib/index.js",
   "scripts": {
-    "build": "rm -rf ./lib/ && microbundle",
-    "dev": "microbundle watch"
+    "build": "tsup",
+    "watch": "yarn build --watch",
+    "test": "vitest"
   },
   "devDependencies": {
-    "microbundle": "^0.15.1"
+    "@tsconfig/strictest": "^2.0.8",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.8"
   },
   "keywords": [
     "promise",
@@ -31,7 +28,7 @@
     "loop"
   ],
   "dependencies": {
-    "@chriscdn/promise-semaphore": "^3.1.2"
+    "@chriscdn/promise-semaphore": "^4.0.0"
   },
   "files": [
     "lib"

@@ -1,57 +1,89 @@
 # @chriscdn/async-each
 
-Iterate an array in an asynchronous manner with a progress callback function.
+Asynchronously iterate over an array with optional concurrency control and a progress callback.
+
+## Installation
+
+```bash
+npm install @chriscdn/async-each
+# or
+yarn add @chriscdn/async-each
+```
 
 ## Motivation
 
-Iterating a large array can block the event loop if the block doesn't include asynchronous code. This can cause the user interface to become unresponsive.
+Processing large arrays synchronously can block the event loop and make the UI unresponsive.
 
-This module provides a method for iterating an array in an asynchronous manner, which helps minimise the risk of blocking the event loop. It also provides a status callback to report the progress of the iteration. This can be useful for providing feedback to the user on the state of a process.
+`@chriscdn/async-each` provides an asynchronous iteration method with optional concurrency control and progress reporting, returning a `Promise` that resolves to an array of results in the same order as the input.
 
-The function returns a `Promise`, which resolves to an array with the return values.
+## API
 
-## Syntax
+### `asyncEach<T, R>(items, callbackFn, statusCallbackFn?, options?) => Promise<R[]>`
 
-```js
-const results = await asyncEach(array, callbackFn, statusCallbackFn);
+Iterate over an array asynchronously.
+
+#### Parameters
+
+- `items: Array<T>`
+  Array of items to process.
+
+- `callbackFn: (item: T, index: number, items: Array<T>) => R | Promise<R>`
+  Function executed for each item. Can return a value or a promise. Arguments:
+  - `item` – Current item being processed
+  - `index` – Zero-based index of the item
+  - `items` – Full array being processed
+
+- `statusCallbackFn?: (status: AsyncEachStatus<T, R>) => void`
+  Optional callback invoked after each item completes. Receives a status object:
+  - `progress` – Number of items processed so far
+  - `total` – Total number of items
+  - `percent` – Completion percentage (integer 0–100)
+  - `item` – The item just processed
+  - `index` – Index of the item
+  - `result` – Value returned or resolved by `callbackFn` for this item
+
+- `options?: { rateLimit?: number }`
+  Optional configuration:
+  - `rateLimit` – Maximum number of concurrent operations (default `0` for unlimited concurrency)
+
+#### Returns
+
+`Promise<R[]>` – Resolves to an array of results in the same order as the input array. Rejects if any callback fails.
+
+## Types
+
+```ts
+export type AsyncEachStatus<T, R> = {
+  progress: number;
+  total: number;
+  percent: number;
+  item: T;
+  index: number;
+  result: R;
+};
 ```
-
-### Parameters
-
-- `array`
-  - The array to iterate.
-- `callbackFn`
-  - A function to execute on each element of the array. The function can return a promise, and the resolved value is aggregated into `results`. The function is called with the following arguments:
-    - `item` - The current item being processed in the array.
-    - `index` - The index of the item being processed in the array.
-    - `items` - The array being processed.
-- `statusCallbackFn`
-  - An optional callback function to execute on the completion of an iteration. The function takes one argument, which is an object containing the following properties:
-    - `progress` - The total number of items that have been processed.
-    - `total` - The length of the array being processed.
-    - `percent` - The number of items processed, as a percentage of the total number of items to process. This is simply `Math.floor((100 * progress) / total)`.
-    - `item` - The item of the array that was just completed.
-    - `index` - The index of the item of the array that was just completed.
-    - `result` - The resolved return value of the callback function on the item.
 
 ## Example
 
-The following example squares an array of integers.
+```ts
+import { asyncEach } from "@chriscdn/async-each";
 
-```js
-import asyncEach from "@chriscdn/async-each";
+// Assume fetchUserData performs an async API call to return user info
+const users = ["alice", "bob", "charlie", "dave"];
 
 const results = await asyncEach(
-  [1, 2, 3],
-  (item, index, items) => item * item,
+  users,
+  async (username) => fetchUserData(username),
   (status) => {
-    // status can be used to show a progress indicator to the user
-    console.log(status);
-  }
+    console.log(
+      `Processed ${status.progress}/${status.total} (${status.percent}%)`,
+      status.result,
+    );
+  },
+  { rateLimit: 2 }, // only 2 requests at a time
 );
 
-console.log(results);
-// [1, 4, 9];
+console.log("All users fetched:", results);
 ```
 
 ## License
